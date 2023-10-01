@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_flutter/profileScreen.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({Key? key}) : super(key: key);
@@ -25,7 +26,8 @@ class DrawerWidget extends StatelessWidget {
                 //     Text('پروفایل')
                 //   ],)
                 ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () {Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const ProfileEditPage()));},
                   label: const Text('پروفایل'),
                   icon: const Icon(
                     Icons.person,

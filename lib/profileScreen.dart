@@ -8,18 +8,16 @@ class ProfileEditPage extends StatefulWidget {
 }
 
 class _ProfileEditPageState extends State<ProfileEditPage> {
-   TextEditingController _nameController;
-   TextEditingController _phoneController;
-   TextEditingController _emailController;
-
-_ProfileEditPageState(this._emailController, this._nameController, this._phoneController)
+  late TextEditingController _nameController;
+  late TextEditingController _phoneController;
+  late TextEditingController _emailController;
 
   @override
   void initState() {
     super.initState();
     _nameController = TextEditingController();
-    _phoneController = TextEditingController();
     _emailController = TextEditingController();
+    _phoneController = TextEditingController();
   }
 
   @override
@@ -30,13 +28,12 @@ _ProfileEditPageState(this._emailController, this._nameController, this._phoneCo
     _emailController.dispose();
   }
 
-  @override
-  void _saveChanges() {
+  // @override
+  _saveChanges() {
     String name = _nameController.text;
     String phone = _phoneController.text;
     String email = _emailController.text;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -45,23 +42,24 @@ _ProfileEditPageState(this._emailController, this._nameController, this._phoneCo
           child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
-          children: [TextFormField(
-            controller: _nameController,
-            decoration:const InputDecoration(labelText: "نام و نام خانوادگی"),
-          ),
-          TextFormField(
-            controller: _phoneController,
-            decoration:const InputDecoration(labelText: "تلفن همراه"),
-          keyboardType: TextInputType.phone,), 
-          TextFormField(
-            controller: _emailController,
-            decoration: const InputDecoration(labelText: "ایمیل"),
-          ), 
-         const SizedBox(height: 20,),
-        TextButton(
-          onPressed:_saveChanges,
-          child : const Text("ذخیره تغییرات")
-        )
+          children: [
+            TextFormField(
+              controller: _nameController,
+              decoration:
+                  const InputDecoration(labelText: "نام و نام خانوادگی"),
+            ),
+            TextFormField(
+              controller: _phoneController,
+              decoration: const InputDecoration(labelText: "تلفن همراه"),
+              keyboardType: TextInputType.phone,
+            ),
+            TextFormField(
+              controller: _emailController,
+              decoration: const InputDecoration(labelText: "ایمیل"),
+            ),
+            const SizedBox(height: 20),
+            TextButton(
+                onPressed: _saveChanges, child: const Text("ذخیره تغییرات"))
           ],
         ),
       )),
