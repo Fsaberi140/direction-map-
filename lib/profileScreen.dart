@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ProfileEditPage extends StatefulWidget {
-  const ProfileEditPage({super.key});
+  const ProfileEditPage({Key? key}) : super(key: key);
 
   @override
   State<ProfileEditPage> createState() => _ProfileEditPageState();
@@ -28,8 +28,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
     _emailController.dispose();
   }
 
-  // @override
-  _saveChanges() {
+  void _saveChanges() {
     String name = _nameController.text;
     String phone = _phoneController.text;
     String email = _emailController.text;
@@ -37,32 +36,64 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(
-          children: [
-            TextFormField(
-              controller: _nameController,
-              decoration:
-                  const InputDecoration(labelText: "نام و نام خانوادگی"),
-            ),
-            TextFormField(
-              controller: _phoneController,
-              decoration: const InputDecoration(labelText: "تلفن همراه"),
-              keyboardType: TextInputType.phone,
-            ),
-            TextFormField(
-              controller: _emailController,
-              decoration: const InputDecoration(labelText: "ایمیل"),
-            ),
-            const SizedBox(height: 20),
-            TextButton(
-                onPressed: _saveChanges, child: const Text("ذخیره تغییرات"))
-          ],
-        ),
-      )),
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        body: SafeArea(
+            child: Padding(
+          padding: const EdgeInsets.fromLTRB(25, 20, 25, 50),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextFormField(
+                controller: _nameController,
+                decoration: const InputDecoration(
+                    labelText: "نام و نام خانوادگی",
+                    labelStyle: TextStyle(fontSize: 15)),
+              ),
+              TextFormField(
+                controller: _phoneController,
+                decoration: const InputDecoration(
+                    labelText: "تلفن همراه",
+                    labelStyle: TextStyle(fontSize: 15)),
+                keyboardType: TextInputType.phone,
+              ),
+              TextFormField(
+                controller: _emailController,
+                decoration: const InputDecoration(
+                 
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.purpleAccent)),
+                    focusColor: Colors.purpleAccent,
+                    
+                    labelText: "ایمیل",                    
+                    labelStyle: TextStyle(fontSize: 15,), ),
+              ),
+              const SizedBox(height: 25),
+              Container(
+                width: 150,
+                height: 45,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25),
+                  color: Colors.purpleAccent,
+                ),
+                child: TextButton(
+                  onPressed: () {
+                    _saveChanges();
+                  },
+                  child: const Text(
+                    'اعمال تغییرات',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        )),
+      ),
     );
   }
 }

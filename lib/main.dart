@@ -12,10 +12,14 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -43,6 +47,8 @@ class _MainScreenState extends State<MainScreen> {
   List<LatLng> routingPoints = [];
   NeshanResponse? neshanResponse;
   final GlobalKey<ScaffoldState> _key = GlobalKey();
+  bool isSearching = false;
+
 
   @override
   void initState() {
@@ -117,9 +123,7 @@ class _MainScreenState extends State<MainScreen> {
             },
             child: const Icon(Icons.info_outline),
           ),
-          const SizedBox(
-            width: 8,
-          ),
+          const SizedBox(width: 8),
           FloatingActionButton(
             backgroundColor: Colors.purpleAccent,
             onPressed: () {
@@ -136,32 +140,7 @@ class _MainScreenState extends State<MainScreen> {
         ],
       ),
       key: _key,
-      appBar: AppBar(
-        centerTitle: true,
-        title: InkWell(
-            onTap: () {},
-            child: const Text("Map", style: TextStyle(color: Colors.black))),
-        leading: IconButton(
-            onPressed: () => {_key.currentState!.openDrawer()},
-            icon: const Icon(
-              Icons.menu,
-              color: Colors.black,
-              size: 26,
-            )),
-        backgroundColor: Colors.purpleAccent,
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const DrawerWidget()));
-              },
-              icon: const Icon(
-                Icons.person,
-                color: Colors.black,
-                size: 26,
-              ))
-        ],
-      ),
+      appBar: buildAppBar(),
       body: FlutterMap(
         mapController: mapController,
         options: MapOptions(
@@ -222,9 +201,87 @@ class _MainScreenState extends State<MainScreen> {
           ])
         ],
       ),
-      drawer: const Drawer(
-          child: DrawerWidget(),
+      endDrawer: Drawer(
+        child: Directionality(
+          textDirection: TextDirection.rtl,
+          child: ListView(
+            children: [
+              const SizedBox(
+                height: 60,
+                child: DrawerHeader(
+                  decoration: BoxDecoration(
+                    color: Colors.white, // رنگ پس‌زمینه دراور
+                  ),
+                  child: Text(
+                    'پروفایل',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+              ),
+              ListTile(
+                leading: const Icon(Icons.person),
+                title: const Text('پروفایل'),
+                onTap: () {},
+              ),
+              ListTile(
+                leading: const Icon(Icons.mode_of_travel),
+                title: const Text('سفرهای شما'),
+                onTap: () {},
+              ),
+              ListTile(
+                leading: const Icon(Icons.card_giftcard),
+                title: const Text('هدیه شما'),
+                onTap: () {},
+              ),
+              ListTile(
+                leading: const Icon(Icons.star_purple500),
+                title: const Text(
+                  "مکان های پر تردد",
+                  style: TextStyle(color: Colors.black),
+                ),
+                onTap: () {},
+              ),
+            ],
+          ),
         ),
+      ),
+      drawer: const Drawer(
+        child: CustomDrawer(),
+      ),
     );
+  }
+  AppBar buildAppBar(){
+    if (isSearching){
+       return AppBar(
+    
+        centerTitle: true,
+        title: InkWell(
+            onTap: () {},
+            child: const Text("Map", style: TextStyle(color: Colors.black))),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const CustomDrawer()));
+            },
+            icon: const Icon(
+              Icons.person,
+              color: Colors.black,
+              size: 26,
+            )),
+        backgroundColor: Colors.purpleAccent,
+        actions: [
+          IconButton(
+              onPressed: () => {_key.currentState!.openEndDrawer()},
+              icon: const Icon(
+                Icons.menu,
+                color: Colors.black,
+                size: 26,
+              )),
+        ],
+      );
+    }
+      
   }
 }

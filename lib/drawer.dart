@@ -1,79 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:test_flutter/profileScreen.dart';
 
-class DrawerWidget extends StatelessWidget {
-  const DrawerWidget({Key? key}) : super(key: key);
+class CustomDrawer extends StatelessWidget {
+  const CustomDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Scaffold(
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              // crossAxisAlignment: CrossAxisAlignment.start,
-              // mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                // TextButton.icon(
-                //     onPressed: () {},
-                //     icon: const Icon(Icons.person),
-                //     label: const Text('پروفایل'))
-                // Row(
-                //   children: [
-                //     IconButton(onPressed: (){}, icon: Icon(Icons.person)),
-                //     Text('پروفایل')
-                //   ],)
-                ElevatedButton.icon(
-                  onPressed: () {Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const ProfileEditPage()));},
-                  label: const Text('پروفایل'),
-                  icon: const Icon(
-                    Icons.person,
-                    size: 24.0,
-                  ),
-                ),
-                const SizedBox(
-                  height: 8
-                ),
-                ElevatedButton.icon(
-                  onPressed: () {},
-                  label: const Text('سفرهای شما'),
-                  icon: const Icon(
-                    Icons.mode_of_travel,
-                    size: 24.0,
-                  ),
-                ),
-                const SizedBox(
-                  height: 8
-                ),
-                ElevatedButton.icon(
-                  onPressed: () {},
-                  label: const Text('هدیه شما'),
-                  icon: const Icon(
-                    Icons.card_giftcard,
-                    size: 24.0,
-                  ),
-                ),
-                const SizedBox(
-                  height: 8
-                ),
-                ElevatedButton.icon(
-                  onPressed: () {},
-                  label: const Text('مکان های پر تردد'),
-                  icon: const Icon(
-                    Icons.star_purple500,
-                    size: 24.0,
-                  ),
-                ),
-                const SizedBox(
-                  height: 8
-                ),
-              ],
+    return Drawer(
+      child: ListView(
+        children: [
+          const DrawerHeader(
+            decoration: BoxDecoration(
+              color: Colors.white, // رنگ پس‌زمینه دراور
             ),
+            child: Stack(children: [
+              Text(
+                'پروفایل',
+                style: TextStyle(color: Colors.black),
+              ),
+            ]),
           ),
-        ),
+          ListTile(
+            leading: const Icon(Icons.person),
+            title:const Text('پروفایل'),
+            onTap: () {},
+          ),
+          ListTile(
+            leading:const Icon(Icons.mode_of_travel),
+            title:const Text('سفرهای شما'),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: const Icon(Icons.card_giftcard),
+            title: const Text('هدیه شما'),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: const Icon(Icons.star_purple500),
+            title: const Text(
+              "مکان های پر تردد",
+              style: TextStyle(color: Colors.black),
+            ),
+            onTap: () {},
+          ),
+        ],
       ),
     );
   }
