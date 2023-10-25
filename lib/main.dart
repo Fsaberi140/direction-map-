@@ -48,12 +48,18 @@ class _MainScreenState extends State<MainScreen> {
   NeshanResponse? neshanResponse;
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   bool isSearching = false;
-
+  TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
     getUserLocation();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    searchController.dispose();
   }
 
   Future<void> getUserLocation() async {
@@ -148,7 +154,6 @@ class _MainScreenState extends State<MainScreen> {
             zoom: 18,
             onLongPress: (position, location) async {
               if (userLocation == null) return;
-
               try {
                 final result = await ApiService.getDirections(
                     LatLng(userLocation!.latitude!, userLocation!.longitude!),
@@ -210,34 +215,39 @@ class _MainScreenState extends State<MainScreen> {
                 height: 60,
                 child: DrawerHeader(
                   decoration: BoxDecoration(
-                    color: Colors.white, // رنگ پس‌زمینه دراور
-                  ),
+                      color: Colors.purpleAccent,
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(12),
+                          bottomRight: Radius.circular(12))),
                   child: Text(
-                    'پروفایل',
-                    style: TextStyle(color: Colors.black),
+                    'سلام دوست من',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600),
                   ),
                 ),
               ),
               ListTile(
-                leading: const Icon(Icons.person),
+                leading: const Icon(Icons.person, color: Colors.purple),
                 title: const Text('پروفایل'),
                 onTap: () {},
               ),
               ListTile(
-                leading: const Icon(Icons.mode_of_travel),
+                leading: const Icon(Icons.mode_of_travel, color: Colors.purple),
                 title: const Text('سفرهای شما'),
                 onTap: () {},
               ),
               ListTile(
-                leading: const Icon(Icons.card_giftcard),
+                leading: const Icon(Icons.card_giftcard, color: Colors.purple),
                 title: const Text('هدیه شما'),
                 onTap: () {},
               ),
               ListTile(
-                leading: const Icon(Icons.star_purple500),
+                leading: const Icon(Icons.star_purple500, color: Colors.purple),
                 title: const Text(
                   "مکان های پر تردد",
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(color: Colors.black87),
                 ),
                 onTap: () {},
               ),
@@ -250,38 +260,103 @@ class _MainScreenState extends State<MainScreen> {
       ),
     );
   }
-  AppBar buildAppBar(){
-    if (isSearching){
-       return AppBar(
-    
-        centerTitle: true,
-        title: InkWell(
-            onTap: () {},
-            child: const Text("Map", style: TextStyle(color: Colors.black))),
-        leading: IconButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const CustomDrawer()));
-            },
-            icon: const Icon(
-              Icons.person,
-              color: Colors.black,
-              size: 26,
-            )),
-        backgroundColor: Colors.purpleAccent,
-        actions: [
-          IconButton(
-              onPressed: () => {_key.currentState!.openEndDrawer()},
-              icon: const Icon(
-                Icons.menu,
-                color: Colors.black,
-                size: 26,
-              )),
-        ],
-      );
-    }
-      
+
+  AppBar buildAppBar() {
+    return AppBar(
+      leadingWidth: MediaQuery.of(context).size.width - 80,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+        side: const BorderSide(color: Colors.purple, width: 1),
+      ),
+      leading: isSearching
+          ? TextField(
+              cursorColor: Colors.purple,
+              textAlign: TextAlign.right,
+              controller: searchController,
+              style: const TextStyle(color: Colors.black),
+              decoration: const InputDecoration(
+                hintText: 'جستجو',
+                hintStyle: TextStyle(color: Colors.black),
+                border: InputBorder.none,
+              ),
+              onChanged: (value) {
+                if (value.isEmpty) {
+                  setState(() {
+                    isSearching = false;
+                  });
+                }
+              })
+          : InkWell(
+              onTap: () {
+                setState(() {
+                  isSearching = true;
+                });
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: isSearching
+                      ? const Icon(
+                          Icons.arrow_back,
+                          color: Colors.black,
+                        )
+                      : const Icon(
+                          Icons.search,
+                          color: Colors.black,
+                          size: 26,
+                        ),
+                ),
+              ),
+            ),
+      backgroundColor: Colors.purpleAccent,
+      actions: [
+        IconButton(
+          onPressed: () {
+            _key.currentState!.openEndDrawer();
+          },
+          icon: const Icon(
+            Icons.menu,
+            color: Colors.black,
+            size: 26,
+          ),
+        ),
+      ],
+    );
   }
 }
+  // AppBar buildAppBar(){
+    // if (isSearching){
+    //    return AppBar(
+    
+    //     centerTitle: true,
+    //     title: InkWell(
+    //         onTap: () {},
+    //         child: const Text("Map", style: TextStyle(color: Colors.black))),
+    //     leading: IconButton(
+    //         onPressed: () {
+    //           Navigator.push(
+    //               context,
+    //               MaterialPageRoute(
+    //                   builder: (context) => const CustomDrawer()));
+    //         },
+    //         icon: const Icon(
+    //           Icons.person,
+    //           color: Colors.black,
+    //           size: 26,
+    //         )),
+    //     backgroundColor: Colors.purpleAccent,
+    //     actions: [
+    //       IconButton(
+    //           onPressed: () => {_key.currentState!.openEndDrawer()},
+    //           icon: const Icon(
+    //             Icons.menu,
+    //             color: Colors.black,
+    //             size: 26,
+    //           )),
+    //     ],
+    //   );
+    // }
+      
+  
+
