@@ -6,6 +6,7 @@ import 'package:location/location.dart';
 import 'package:test_flutter/data.dart';
 import 'package:test_flutter/utils.dart';
 import 'api_service.dart';
+import 'auth.dart';
 import 'drawer.dart';
 
 void main() {
@@ -26,9 +27,9 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
       ),
-      home: const MainScreen(),
+      home: const AuthPage(),
     );
   }
 }
