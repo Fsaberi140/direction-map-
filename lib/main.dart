@@ -4,6 +4,8 @@ import 'package:google_polyline_algorithm/google_polyline_algorithm.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 import 'package:test_flutter/data.dart';
+import 'package:test_flutter/giftCard.dart';
+import 'package:test_flutter/profileScreen.dart';
 import 'package:test_flutter/utils.dart';
 import 'api_service.dart';
 import 'auth.dart';
@@ -23,13 +25,18 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
+    const textStyle = TextStyle(fontFamily: 'Shabnam');
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.purple,
-      ),
-      home: const AuthPage(),
+          primarySwatch: Colors.purple,
+          textTheme: const TextTheme(
+            bodyLarge: textStyle,
+            bodyMedium: textStyle,
+            bodySmall: textStyle,
+          )),
+      home: const MainScreen(),
     );
   }
 }
@@ -232,17 +239,32 @@ class _MainScreenState extends State<MainScreen> {
               ListTile(
                 leading: const Icon(Icons.person, color: Colors.purple),
                 title: const Text('پروفایل'),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ProfileEditPage()));
+                },
               ),
               ListTile(
                 leading: const Icon(Icons.mode_of_travel, color: Colors.purple),
                 title: const Text('سفرهای شما'),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const GiftCard()));
+                },
               ),
               ListTile(
                 leading: const Icon(Icons.card_giftcard, color: Colors.purple),
                 title: const Text('هدیه شما'),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const GiftCard()));
+                },
               ),
               ListTile(
                 leading: const Icon(Icons.star_purple500, color: Colors.purple),
@@ -266,7 +288,7 @@ class _MainScreenState extends State<MainScreen> {
     return AppBar(
       leadingWidth: MediaQuery.of(context).size.width - 80,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
+        // borderRadius: BorderRadius.circular(15),
         side: const BorderSide(color: Colors.purple, width: 1),
       ),
       leading: isSearching
@@ -326,38 +348,35 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 }
-  // AppBar buildAppBar(){
-    // if (isSearching){
-    //    return AppBar(
-    
-    //     centerTitle: true,
-    //     title: InkWell(
-    //         onTap: () {},
-    //         child: const Text("Map", style: TextStyle(color: Colors.black))),
-    //     leading: IconButton(
-    //         onPressed: () {
-    //           Navigator.push(
-    //               context,
-    //               MaterialPageRoute(
-    //                   builder: (context) => const CustomDrawer()));
-    //         },
-    //         icon: const Icon(
-    //           Icons.person,
-    //           color: Colors.black,
-    //           size: 26,
-    //         )),
-    //     backgroundColor: Colors.purpleAccent,
-    //     actions: [
-    //       IconButton(
-    //           onPressed: () => {_key.currentState!.openEndDrawer()},
-    //           icon: const Icon(
-    //             Icons.menu,
-    //             color: Colors.black,
-    //             size: 26,
-    //           )),
-    //     ],
-    //   );
-    // }
-      
-  
+// AppBar buildAppBar(){
+// if (isSearching){
+//    return AppBar(
 
+//     centerTitle: true,
+//     title: InkWell(
+//         onTap: () {},
+//         child: const Text("Map", style: TextStyle(color: Colors.black))),
+//     leading: IconButton(
+//         onPressed: () {
+//           Navigator.push(
+//               context,
+//               MaterialPageRoute(
+//                   builder: (context) => const CustomDrawer()));
+//         },
+//         icon: const Icon(
+//           Icons.person,
+//           color: Colors.black,
+//           size: 26,
+//         )),
+//     backgroundColor: Colors.purpleAccent,
+//     actions: [
+//       IconButton(
+//           onPressed: () => {_key.currentState!.openEndDrawer()},
+//           icon: const Icon(
+//             Icons.menu,
+//             color: Colors.black,
+//             size: 26,
+//           )),
+//     ],
+//   );
+// }
