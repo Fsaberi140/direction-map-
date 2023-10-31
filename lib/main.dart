@@ -7,6 +7,7 @@ import 'package:test_flutter/data.dart';
 import 'package:test_flutter/giftCard.dart';
 import 'package:test_flutter/profileScreen.dart';
 import 'package:test_flutter/utils.dart';
+import 'package:test_flutter/yourTravel.dart';
 import 'api_service.dart';
 import 'auth.dart';
 import 'drawer.dart';
@@ -253,7 +254,7 @@ class _MainScreenState extends State<MainScreen> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const GiftCard()));
+                          builder: (context) => const YourTravel()));
                 },
               ),
               ListTile(
