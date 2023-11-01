@@ -11,12 +11,11 @@ class YourTravel extends StatelessWidget {
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(8, 20, 8, 15),
+              padding: const EdgeInsets.fromLTRB(8, 15, 8, 15),
               child: IntrinsicHeight(
                 child: Container(
                   margin: const EdgeInsets.all(10),
                   width: MediaQuery.of(context).size.width - 20,
-                  
                   decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(
@@ -31,12 +30,15 @@ class YourTravel extends StatelessWidget {
                       Expanded(
                         child: Column(
                           children: [
-                            
                             Padding(
                               padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                               child: Row(
                                 children: [
-                                  Expanded(child: Text('مبدا:',style: TextStyle(fontSize: 15),)),
+                                  Expanded(
+                                      child: Text(
+                                    'مبدا:',
+                                    style: TextStyle(fontSize: 15),
+                                  )),
                                   Expanded(
                                       child: Text(
                                           'اصفهان،خیابان سعدی،کوچه 15، پلاک1')),
@@ -48,10 +50,12 @@ class YourTravel extends StatelessWidget {
                               padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                               child: Row(
                                 children: [
-                                  Expanded(child: Text('مقصد:',style: TextStyle(fontSize: 15))),
                                   Expanded(
-                                      child:
-                                          Text('اصفهان،خیابان مولوی، کوچه 33')),
+                                      child: Text('مقصد:',
+                                          style: TextStyle(fontSize: 15))),
+                                  Expanded(
+                                      child: Text(
+                                          'اصفهان،خیابان مولوی، کوچه 33')),
                                 ],
                               ),
                             ),
@@ -60,8 +64,11 @@ class YourTravel extends StatelessWidget {
                               padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                               child: Row(
                                 children: [
-                                  Expanded(child: Text('راننده:',style: TextStyle(fontSize: 15))),
-                                  Expanded(child: Text('مرتضی رضوی اردستانی')),
+                                  Expanded(
+                                      child: Text('راننده:',
+                                          style: TextStyle(fontSize: 15))),
+                                  Expanded(
+                                      child: Text('مرتضی رضوی اردستانی')),
                                 ],
                               ),
                             ),
@@ -70,7 +77,9 @@ class YourTravel extends StatelessWidget {
                               padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
                               child: Row(
                                 children: [
-                                  Expanded(child: Text('پلاک:', style: TextStyle(fontSize: 15))),
+                                  Expanded(
+                                      child: Text('پلاک:',
+                                          style: TextStyle(fontSize: 15))),
                                   Expanded(child: Text('12 ی 12345')),
                                 ],
                               ),

@@ -3,14 +3,14 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:google_polyline_algorithm/google_polyline_algorithm.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
-import 'package:test_flutter/data.dart';
-import 'package:test_flutter/giftCard.dart';
-import 'package:test_flutter/profileScreen.dart';
-import 'package:test_flutter/utils.dart';
-import 'package:test_flutter/yourTravel.dart';
-import 'api_service.dart';
-import 'auth.dart';
-import 'drawer.dart';
+import 'package:test_flutter/pages/data.dart';
+import 'package:test_flutter/pages/giftCard.dart';
+import 'package:test_flutter/pages/highTrafficPlaces.dart';
+import 'package:test_flutter/pages/profileScreen.dart';
+import 'package:test_flutter/pages/utils.dart';
+import 'package:test_flutter/pages/yourTravel.dart';
+import 'pages/api_service.dart';
+import 'pages/drawer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -273,7 +273,9 @@ class _MainScreenState extends State<MainScreen> {
                   "مکان های پر تردد",
                   style: TextStyle(color: Colors.black87),
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context,MaterialPageRoute(builder: (context)=>const HighTrafficPlaces()));
+                },
               ),
             ],
           ),
@@ -349,35 +351,3 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 }
-// AppBar buildAppBar(){
-// if (isSearching){
-//    return AppBar(
-
-//     centerTitle: true,
-//     title: InkWell(
-//         onTap: () {},
-//         child: const Text("Map", style: TextStyle(color: Colors.black))),
-//     leading: IconButton(
-//         onPressed: () {
-//           Navigator.push(
-//               context,
-//               MaterialPageRoute(
-//                   builder: (context) => const CustomDrawer()));
-//         },
-//         icon: const Icon(
-//           Icons.person,
-//           color: Colors.black,
-//           size: 26,
-//         )),
-//     backgroundColor: Colors.purpleAccent,
-//     actions: [
-//       IconButton(
-//           onPressed: () => {_key.currentState!.openEndDrawer()},
-//           icon: const Icon(
-//             Icons.menu,
-//             color: Colors.black,
-//             size: 26,
-//           )),
-//     ],
-//   );
-// }

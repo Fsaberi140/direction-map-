@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test_flutter/profileScreen.dart';
+import 'package:test_flutter/pages/profileScreen.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({Key? key}) : super(key: key);
